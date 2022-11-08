@@ -7,4 +7,6 @@ public interface IShop extends Remote {
     public void deleteBike(long id) throws RemoteException;
 
     public List<IBike> lookBike() throws RemoteException;
+    public List<PersonUGE> lookPeople() throws RemoteException;
+    public List<Bike> bikeLocator(long id) throws RemoteException;
 }
