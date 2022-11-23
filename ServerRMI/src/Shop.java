@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 public class Shop extends UnicastRemoteObject implements IShop{
 
     private final Map<Long, Bike> bikes = new HashMap<>();
+    private final Map<Long, PersonUGE> people = new HashMap<>();
 
     protected Shop() throws RemoteException {
         super();
@@ -26,6 +27,25 @@ public class Shop extends UnicastRemoteObject implements IShop{
     public List<IBike> lookBike() throws RemoteException {
         return new ArrayList<>(bikes.values());
     }
+
+    @Override
+    public List<PersonUGE> lookPeople() throws RemoteException {
+        return new ArrayList<>(people.values());
+    }
+
+    @Override
+    public List<Bike> bikeLocator(long id) throws RemoteException {
+        return bikes.values().stream().filter(x -> {
+            try {
+                return x.getOwner().getId() == id;
+            } catch (RemoteException e) {
+                throw new RuntimeException(e);
+            }
+        }).collect(Collectors.toList());
+    }
+
+
+
 
     /*@Override
     public Bike searchBike(long id) throws RemoteException {
