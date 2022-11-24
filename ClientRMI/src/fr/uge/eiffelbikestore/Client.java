@@ -1,5 +1,6 @@
 package fr.uge.eiffelbikestore;
 
+import fr.uge.eiffelbikestore.bike.IBike;
 import fr.uge.eiffelbikestore.person.PersonUGE;
 import fr.uge.eiffelbikestore.person.Student;
 import fr.uge.eiffelbikestore.shop.IShop;
@@ -11,18 +12,20 @@ public class Client {
     public static void main(String[] args) {
         try {
             IShop shop = (IShop) Naming.lookup("rmi://localhost/BikeShopService");
-            PersonUGE student = new Student(1, "John", "Doe");
-            shop.addBike(1, student);
-            shop.lookBike().forEach(x -> {
-                try {
-                    System.out.println("bike ID : " + x.getId());
-                    System.out.println("owner ID : " + x.getOwner().getId());
-                    System.out.println("owner firstname : " + x.getOwner().getFirstName());
-                    System.out.println("owner lastname : " + x.getOwner().getLastName());
-                } catch (RemoteException e) {
-                    throw new RuntimeException(e);
-                }
-            });
+            PersonUGE studentJoe = new Student(1, "John", "Doe");
+            PersonUGE studentJane = new Student(2, "Jane", "Dona");
+            PersonUGE studentJosh = new Student(3, "Josh", "Donato");
+
+            shop.addBike(1, studentJoe);
+            var test1 = shop.rentRequest(studentJane, 1);
+            System.out.println(shop.searchBike(1).getQueue());
+            System.out.println(shop.searchBike(1).getTenant().getFirstName());
+            var test2 = shop.rentRequest(studentJosh, 1);
+            System.out.println(shop.searchBike(1).getQueue());
+            shop.stopActualLocation(1);
+            System.out.println(shop.searchBike(1).getQueue());
+            System.out.println(shop.searchBike(1).getTenant().getFirstName());
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

@@ -1,9 +1,11 @@
 package fr.uge.eiffelbikestore.bike;
 
 import fr.uge.eiffelbikestore.person.PersonUGE;
+
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
+import java.util.Queue;
 
 public interface IBike extends Remote {
 
@@ -19,4 +21,8 @@ public interface IBike extends Remote {
     public void setMark(List<Integer> marks) throws RemoteException;
     public void addMark(int mark) throws RemoteException;
     public List<Integer> getMarks() throws RemoteException;
+
+    public void addPersonneToQueue(PersonUGE personUGE) throws RemoteException;
+    public void endOfLocation() throws RemoteException;
+    public Queue<PersonUGE> getQueue()throws RemoteException;
 }

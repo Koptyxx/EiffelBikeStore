@@ -41,7 +41,7 @@ public class Shop extends UnicastRemoteObject implements IShop{
     }
 
     @Override
-    public List<Bike> bikeLocator(long id) throws RemoteException {
+    public List<IBike> bikeLocator(long id) throws RemoteException {
         return bikes.values().stream().filter(x -> {
             try {
                 return x.getOwner().getId() == id;
@@ -51,14 +51,37 @@ public class Shop extends UnicastRemoteObject implements IShop{
         }).collect(Collectors.toList());
     }
 
-
-
-
     @Override
     public Bike searchBike(long id) throws RemoteException {
         var bike = bikes.get(id);
         if(bike == null)
             throw new IllegalStateException();
         return bike;
+    }
+    @Override
+    public boolean rentRequest(PersonUGE personUGE, long id) throws RemoteException {
+        var bike = bikes.get(id);
+        if(bike == null){
+            throw new IllegalStateException();
+        }
+        if (bike.getTenant() == null)
+            bike.setTenant(personUGE);
+        else{
+            bike.addPersonneToQueue(personUGE);
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public void stopActualLocation(long id) throws RemoteException {
+        var bike = bikes.get(id);
+        if(bike == null){
+            throw new IllegalStateException();
+        }
+        if (bike.getTenant() == null){
+            throw new IllegalStateException();
+        }
+        bike.endOfLocation();
     }
 }
