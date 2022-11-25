@@ -5,7 +5,6 @@ import fr.uge.eiffelbikestore.person.PersonUGE;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.*;
-import java.util.concurrent.locks.ReentrantLock;
 
 public class Bike extends UnicastRemoteObject implements IBike {
 
@@ -15,6 +14,8 @@ public class Bike extends UnicastRemoteObject implements IBike {
     private List<Integer> marks;
 
     private final Queue<PersonUGE> queue = new ArrayDeque<>();
+
+    private int price;
 
     public Bike() throws RemoteException {}
 
@@ -82,6 +83,17 @@ public class Bike extends UnicastRemoteObject implements IBike {
     public PersonUGE getOwner() throws RemoteException {
         return owner;
     }
+
+    @Override
+    public int getPrice() {
+        return price;
+    }
+
+    @Override
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
     @Override
     public void addPersonneToQueue(PersonUGE personUGE) throws RemoteException{
         Objects.requireNonNull(personUGE);

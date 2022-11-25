@@ -16,11 +16,11 @@ public interface IShop extends Remote {
 
     IBike searchBike(long id) throws RemoteException;
 
-    public List<PersonUGE> lookPeople() throws RemoteException;
+    List<PersonUGE> lookPeople() throws RemoteException;
 
-    public List<IBike> bikeLocator(long id) throws RemoteException;
+    List<IBike> bikeLocator(long id) throws RemoteException;
 
-    public boolean rentRequest(PersonUGE personUGE, long id) throws RemoteException;
+    boolean rentRequest(PersonUGE personUGE, long id) throws RemoteException;
 
-    public void stopActualLocation(long id) throws RemoteException;
+    void stopActualLocation(long id) throws RemoteException;
 }
