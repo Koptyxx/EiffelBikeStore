@@ -1,5 +1,7 @@
 package fr.uge.eiffelbikestore.person;
 
+import fr.uge.eiffelbikestore.bike.IBike;
+
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Objects;
@@ -50,6 +52,12 @@ public class Student extends UnicastRemoteObject implements PersonUGE{
         Objects.requireNonNull(lastName);
         this.lastName = lastName;
     }
+
+    @Override
+    public void notifyChange(IBike bike) throws RemoteException {
+        System.out.println(firstName + " "  + lastName + " vous êtes devenue le locataire du vélo numéro " + bike.getId());
+    }
+
 
     @Override
     public String toString() {

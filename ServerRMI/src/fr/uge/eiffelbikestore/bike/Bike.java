@@ -12,7 +12,6 @@ public class Bike extends UnicastRemoteObject implements IBike {
     private PersonUGE owner;
     private PersonUGE tenant;
     private List<Integer> marks;
-
     private final Queue<PersonUGE> queue = new ArrayDeque<>();
 
     private int price;
@@ -42,6 +41,11 @@ public class Bike extends UnicastRemoteObject implements IBike {
     public void setTenant(PersonUGE tenant) {
         Objects.requireNonNull(tenant);
         this.tenant = tenant;
+        try {
+            this.tenant.notifyChange(this);
+        } catch (RemoteException e){
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -101,11 +105,15 @@ public class Bike extends UnicastRemoteObject implements IBike {
     }
     @Override
     public void endOfLocation() throws RemoteException{
-        tenant = queue.poll();
+        var headQueue = queue.poll();
+        if(headQueue != null){
+            setTenant(headQueue);
+        }
     }
 
     @Override
     public Queue<PersonUGE> getQueue()throws RemoteException {
         return queue;
     }
+
 }

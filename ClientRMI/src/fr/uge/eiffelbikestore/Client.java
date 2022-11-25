@@ -16,14 +16,9 @@ public class Client {
 
             shop.addBike(1, studentJoe);
             var test1 = shop.rentRequest(studentJane, 1);
-            System.out.println(shop.searchBike(1).getQueue());
-            System.out.println(shop.searchBike(1).getTenant().getFirstName());
             var test2 = shop.rentRequest(studentJosh, 1);
             shop.stopActualLocation(1);
-            System.out.println(shop.searchBike(1).getQueue());
-            System.out.println(shop.searchBike(1).getTenant().getFirstName());
             shop.stopActualLocation(1);
-            System.out.println(shop.searchBike(1).getTenant() == null);
 
         } catch (Exception e) {
             throw new RuntimeException(e);

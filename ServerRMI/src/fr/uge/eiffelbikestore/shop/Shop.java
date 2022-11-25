@@ -84,4 +84,5 @@ public class Shop extends UnicastRemoteObject implements IShop{
         }
         bike.endOfLocation();
     }
+
 }
