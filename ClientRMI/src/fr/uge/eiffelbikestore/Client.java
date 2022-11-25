@@ -1,12 +1,10 @@
 package fr.uge.eiffelbikestore;
 
-import fr.uge.eiffelbikestore.bike.IBike;
 import fr.uge.eiffelbikestore.person.PersonUGE;
 import fr.uge.eiffelbikestore.person.Student;
 import fr.uge.eiffelbikestore.shop.IShop;
 
 import java.rmi.Naming;
-import java.rmi.RemoteException;
 
 public class Client {
     public static void main(String[] args) {
@@ -21,10 +19,11 @@ public class Client {
             System.out.println(shop.searchBike(1).getQueue());
             System.out.println(shop.searchBike(1).getTenant().getFirstName());
             var test2 = shop.rentRequest(studentJosh, 1);
-            System.out.println(shop.searchBike(1).getQueue());
             shop.stopActualLocation(1);
             System.out.println(shop.searchBike(1).getQueue());
             System.out.println(shop.searchBike(1).getTenant().getFirstName());
+            shop.stopActualLocation(1);
+            System.out.println(shop.searchBike(1).getTenant() == null);
 
         } catch (Exception e) {
             throw new RuntimeException(e);
