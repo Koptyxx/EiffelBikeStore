@@ -23,7 +23,7 @@ public class Client {
             var test2 = shop.rentRequest(studentJosh, 1);
             shop.stopActualLocation(1, RestitutionState.AVERAGE);
             shop.stopActualLocation(1, RestitutionState.GOOD);
-
+            System.out.println(shop.getTransactionsHistory());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

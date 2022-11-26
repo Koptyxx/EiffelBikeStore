@@ -4,6 +4,7 @@ import fr.uge.eiffelbikestore.bike.Bike;
 import fr.uge.eiffelbikestore.bike.IBike;
 import fr.uge.eiffelbikestore.person.PersonUGE;
 import fr.uge.eiffelbikestore.transaction.RestitutionState;
+import fr.uge.eiffelbikestore.transaction.Transaction;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -14,6 +15,8 @@ public class Shop extends UnicastRemoteObject implements IShop{
 
     private final Map<Long, Bike> bikes;
     private final Map<Long, PersonUGE> people = new HashMap<>();
+
+    private final List<Transaction> transactionsHistory = new ArrayList<>();
 
     public Shop() throws RemoteException {
         super();
@@ -71,6 +74,7 @@ public class Shop extends UnicastRemoteObject implements IShop{
             bike.addPersonneToQueue(personUGE);
             return false;
         }
+        transactionsHistory.add(new Transaction(personUGE, bike));
         return true;
     }
 
@@ -84,6 +88,12 @@ public class Shop extends UnicastRemoteObject implements IShop{
             throw new IllegalStateException();
         }
         bike.endOfLocation(restitutionState);
+        if(bike.getTenant() != null) {
+            transactionsHistory.add(new Transaction(bike.getTenant(), bike));
+        }
+    }
+    public List<Transaction> getTransactionsHistory() throws RemoteException {
+        return List.copyOf(transactionsHistory);
     }
 
 }
