@@ -1,6 +1,7 @@
 package fr.uge.eiffelbikestore.bike;
 
 import fr.uge.eiffelbikestore.person.PersonUGE;
+import fr.uge.eiffelbikestore.transaction.RestitutionState;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -16,13 +17,14 @@ public class Bike extends UnicastRemoteObject implements IBike {
 
     private int price;
 
-    public Bike() throws RemoteException {}
+    private final Map<PersonUGE, List<RestitutionState>> restitutionStateByPerson;
 
     public Bike(long id, PersonUGE owner) throws RemoteException {
         super();
         this.id = id;
         this.owner = owner;
         this.marks = new ArrayList<>();
+        this.restitutionStateByPerson = new HashMap<>();
     }
 
     public double getGlobalMark() {
@@ -41,6 +43,7 @@ public class Bike extends UnicastRemoteObject implements IBike {
     public void setTenant(PersonUGE tenant) {
         Objects.requireNonNull(tenant);
         this.tenant = tenant;
+        restitutionStateByPerson.putIfAbsent(tenant, new ArrayList<>());
         try {
             this.tenant.notifyChange(this);
         } catch (RemoteException e){
@@ -104,8 +107,9 @@ public class Bike extends UnicastRemoteObject implements IBike {
         queue.add(personUGE);
     }
     @Override
-    public void endOfLocation() throws RemoteException{
+    public void endOfLocation(RestitutionState restitutionState) throws RemoteException{
         var headQueue = queue.poll();
+        restitutionStateByPerson.get(tenant).add(restitutionState);
         if(headQueue != null){
             setTenant(headQueue);
         }

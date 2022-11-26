@@ -3,6 +3,7 @@ package fr.uge.eiffelbikestore.shop;
 import fr.uge.eiffelbikestore.bike.Bike;
 import fr.uge.eiffelbikestore.bike.IBike;
 import fr.uge.eiffelbikestore.person.PersonUGE;
+import fr.uge.eiffelbikestore.transaction.RestitutionState;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -74,7 +75,7 @@ public class Shop extends UnicastRemoteObject implements IShop{
     }
 
     @Override
-    public void stopActualLocation(long id) throws RemoteException {
+    public void stopActualLocation(long id, RestitutionState restitutionState) throws RemoteException {
         var bike = bikes.get(id);
         if(bike == null){
             throw new IllegalStateException();
@@ -82,7 +83,7 @@ public class Shop extends UnicastRemoteObject implements IShop{
         if (bike.getTenant() == null){
             throw new IllegalStateException();
         }
-        bike.endOfLocation();
+        bike.endOfLocation(restitutionState);
     }
 
 }

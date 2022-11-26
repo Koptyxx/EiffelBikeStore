@@ -3,6 +3,7 @@ package fr.uge.eiffelbikestore.shop;
 import fr.uge.eiffelbikestore.bike.Bike;
 import fr.uge.eiffelbikestore.bike.IBike;
 import fr.uge.eiffelbikestore.person.PersonUGE;
+import fr.uge.eiffelbikestore.transaction.RestitutionState;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -23,5 +24,5 @@ public interface IShop extends Remote {
 
     public boolean rentRequest(PersonUGE personUGE, long id) throws RemoteException;
 
-    public void stopActualLocation(long id) throws RemoteException;
+    public void stopActualLocation(long id, RestitutionState restitutionState) throws RemoteException;
 }
