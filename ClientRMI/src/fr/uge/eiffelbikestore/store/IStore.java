@@ -1,4 +1,4 @@
-package fr.uge.eiffelbikestore.shop;
+package fr.uge.eiffelbikestore.store;
 
 import fr.uge.eiffelbikestore.bike.IBike;
 import fr.uge.eiffelbikestore.person.PersonUGE;
@@ -9,7 +9,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
-public interface IShop extends Remote {
+public interface IStore extends Remote {
     void addBike(long id, PersonUGE personUGE) throws RemoteException;
 
     void deleteBike(long id) throws RemoteException;

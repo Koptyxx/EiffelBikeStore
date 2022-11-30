@@ -1,4 +1,4 @@
-package fr.uge.eiffelbikestore.shop;
+package fr.uge.eiffelbikestore.store;
 
 import fr.uge.eiffelbikestore.bike.Bike;
 import fr.uge.eiffelbikestore.bike.IBike;
@@ -11,14 +11,14 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Shop extends UnicastRemoteObject implements IShop{
+public class Store extends UnicastRemoteObject implements IStore {
 
     private final Map<Long, Bike> bikes;
     private final Map<Long, PersonUGE> people = new HashMap<>();
 
     private final List<Transaction> transactionsHistory = new ArrayList<>();
 
-    public Shop() throws RemoteException {
+    public Store() throws RemoteException {
         super();
         this.bikes = new HashMap<>();
     }

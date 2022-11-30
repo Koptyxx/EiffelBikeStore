@@ -1,6 +1,5 @@
 package fr.uge.eiffelbikestore.person;
 
-import fr.uge.eiffelbikestore.bike.Bike;
 import fr.uge.eiffelbikestore.bike.IBike;
 
 import java.rmi.RemoteException;
