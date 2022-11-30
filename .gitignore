@@ -21,6 +21,9 @@ tmp/
 .metadata
 .classpath
 .project
+/build/
+*.bak
+*.wsdd
 
 ##############################
 ## OS X
