@@ -29,5 +29,5 @@ public interface IBike extends Remote {
 
     public void addPersonneToQueue(PersonUGE personUGE) throws RemoteException;
     public void endOfLocation(RestitutionState restitutionState) throws RemoteException;
-    public Queue<PersonUGE> getQueue()throws RemoteException;
+    public Queue<PersonUGE> getQueue() throws RemoteException;
 }
