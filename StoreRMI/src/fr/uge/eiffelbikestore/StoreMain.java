@@ -9,12 +9,12 @@ import fr.uge.eiffelbikestore.store.Store;
 import fr.uge.eiffelbikestore.transaction.RestitutionState;
 
 import java.rmi.Naming;
+import java.rmi.registry.LocateRegistry;
 import java.util.Set;
 
 public class StoreMain {
     public static void main(String[] args) {
         try {
-            //LocateRegistry.createRegistry(1099);
             IStore store = new Store();
             IPersons persons = (IPersons) Naming.lookup("rmi://localhost/Persons");
             long studentJoeId = persons.createPerson(1, "John", "Doe", Status.STUDENT);
@@ -31,6 +31,9 @@ public class StoreMain {
             store.stopActualLocation(1, RestitutionState.GOOD);
             Set<IBike> bikes = store.getCanBeBuy();
             bikes.forEach(System.out::println);
+
+            LocateRegistry.createRegistry(1100);
+            Naming.rebind("rmi://localhost:1100/Store", store);
             
         } catch (Exception e) {
             throw new RuntimeException(e);
