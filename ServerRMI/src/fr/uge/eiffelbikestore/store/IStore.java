@@ -27,4 +27,6 @@ public interface IStore extends Remote {
     public void stopActualLocation(long id, RestitutionState restitutionState) throws RemoteException;
 
     public List<Transaction> getTransactionsHistory() throws RemoteException;
+
+    public List<IBike> getCanBeBuy() throws RemoteException;
 }

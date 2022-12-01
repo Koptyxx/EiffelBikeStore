@@ -1,11 +1,13 @@
 package fr.uge.eiffelbikestore;
 
+import fr.uge.eiffelbikestore.bike.IBike;
 import fr.uge.eiffelbikestore.person.PersonUGE;
 import fr.uge.eiffelbikestore.person.Student;
 import fr.uge.eiffelbikestore.store.IStore;
 import fr.uge.eiffelbikestore.transaction.RestitutionState;
 
 import java.rmi.Naming;
+import java.util.List;
 
 public class Client {
     public static void main(String[] args) {
@@ -23,7 +25,8 @@ public class Client {
             var test2 = store.rentRequest(studentJosh, 1);
             store.stopActualLocation(1, RestitutionState.AVERAGE);
             store.stopActualLocation(1, RestitutionState.GOOD);
-            System.out.println(store.getTransactionsHistory());
+            List<IBike> bikes = store.getCanBeBuy();
+            bikes.forEach(x -> System.out.println(x));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
