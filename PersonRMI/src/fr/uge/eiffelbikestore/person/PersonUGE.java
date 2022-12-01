@@ -13,6 +13,7 @@ public interface PersonUGE extends Remote {
     void setFirstName(String firstName) throws RemoteException;
     String getLastName() throws RemoteException;
     void setLastName(String lastName) throws RemoteException;
-
+    Status getStatus() throws RemoteException;
+    void setStatus(Status status) throws RemoteException;
     public void notifyChange(IBike bike) throws RemoteException;
 }

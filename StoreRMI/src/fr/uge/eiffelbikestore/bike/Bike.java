@@ -120,4 +120,10 @@ public class Bike extends UnicastRemoteObject implements IBike {
         return queue;
     }
 
+    @Override
+    public String toString() {
+        return "Bike : id " + id + " marks "
+                + marks + " price "
+                + price;
+    }
 }
