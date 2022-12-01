@@ -8,6 +8,7 @@ import fr.uge.eiffelbikestore.transaction.RestitutionState;
 
 import java.rmi.Naming;
 import java.util.List;
+import java.util.Set;
 
 public class Client {
     public static void main(String[] args) {
@@ -25,7 +26,7 @@ public class Client {
             var test2 = store.rentRequest(studentJosh, 1);
             store.stopActualLocation(1, RestitutionState.AVERAGE);
             store.stopActualLocation(1, RestitutionState.GOOD);
-            List<IBike> bikes = store.getCanBeBuy();
+            Set<IBike> bikes = store.getCanBeBuy();
             bikes.forEach(x -> System.out.println(x));
         } catch (Exception e) {
             throw new RuntimeException(e);

@@ -8,6 +8,7 @@ import fr.uge.eiffelbikestore.transaction.Transaction;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
+import java.util.Set;
 
 public interface IStore extends Remote {
     void addBike(long id, PersonUGE personUGE) throws RemoteException;
@@ -28,5 +29,5 @@ public interface IStore extends Remote {
 
     public List<Transaction> getTransactionsHistory() throws RemoteException;
 
-    public List<IBike> getCanBeBuy() throws RemoteException;
+    public Set<IBike> getCanBeBuy() throws RemoteException;
 }

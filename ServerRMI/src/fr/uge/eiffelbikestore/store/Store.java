@@ -16,7 +16,7 @@ public class Store extends UnicastRemoteObject implements IStore {
     private final Map<Long, Bike> bikes;
     private final Map<Long, PersonUGE> people = new HashMap<>();
 
-    private final List<IBike> canBeBuy = new ArrayList<>();
+    private final Set<IBike> canBeBuy = new HashSet<>();
     private final List<Transaction> transactionsHistory = new ArrayList<>();
 
     public Store() throws RemoteException {
@@ -90,7 +90,6 @@ public class Store extends UnicastRemoteObject implements IStore {
         }
         bike.endOfLocation(restitutionState);
         canBeBuy.add(bike);
-        System.out.println("ici");
         if(bike.getTenant() != null) {
             transactionsHistory.add(new Transaction(bike.getTenant(), bike));
         }
@@ -99,8 +98,8 @@ public class Store extends UnicastRemoteObject implements IStore {
         return List.copyOf(transactionsHistory);
     }
 
-    public List<IBike> getCanBeBuy() throws RemoteException{
-        return List.copyOf(canBeBuy);
+    public Set<IBike> getCanBeBuy() throws RemoteException{
+        return Set.copyOf(canBeBuy);
     }
 
 }

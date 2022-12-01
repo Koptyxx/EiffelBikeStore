@@ -12,8 +12,9 @@ public class Server {
         try {
             LocateRegistry.createRegistry(1099);
             IStore store = new Store();
-            Naming.rebind("rmi://localhost/BikeShopService", store);
             store.addBike(1, new Student(1, "Brayan", "marie"));
+            Naming.rebind("rmi://localhost/BikeShopService", store);
+            
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
