@@ -17,7 +17,7 @@ public class Persons extends UnicastRemoteObject implements IPersons{
 
     @Override
     public Map<Long, PersonUGE> getPersons() throws RemoteException {
-        return Map.copyOf(persons);
+        return persons;
     }
 
     @Override

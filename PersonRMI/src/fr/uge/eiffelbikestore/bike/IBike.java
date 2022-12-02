@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Queue;
 
 public interface IBike extends Remote {
+
     public void setId(long id) throws RemoteException;
     public long getId() throws RemoteException;
     public void setOwner(PersonUGE owner) throws RemoteException;
@@ -22,5 +23,6 @@ public interface IBike extends Remote {
     public List<Integer> getMarks() throws RemoteException;
     public void addPersonneToQueue(PersonUGE personUGE) throws RemoteException;
     public void endOfLocation(RestitutionState restitutionState) throws RemoteException;
-    public Queue<PersonUGE> getQueue()throws RemoteException;
+    public Queue<PersonUGE> getQueue() throws RemoteException;
+
 }

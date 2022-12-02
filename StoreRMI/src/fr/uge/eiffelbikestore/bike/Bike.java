@@ -19,10 +19,11 @@ public class Bike extends UnicastRemoteObject implements IBike {
 
     private final Map<PersonUGE, List<RestitutionState>> restitutionStateByPerson;
 
-    public Bike(long id, PersonUGE owner) throws RemoteException {
+    public Bike(long id, PersonUGE owner, int price) throws RemoteException {
         super();
         this.id = id;
         this.owner = owner;
+        this.price = price;
         this.marks = new ArrayList<>();
         this.restitutionStateByPerson = new HashMap<>();
     }
@@ -67,7 +68,7 @@ public class Bike extends UnicastRemoteObject implements IBike {
     }
     @Override
     public List<Integer> getMarks() throws RemoteException {
-        return List.copyOf(marks);
+        return marks;
     }
 
     @Override
@@ -108,7 +109,7 @@ public class Bike extends UnicastRemoteObject implements IBike {
     }
     @Override
     public void endOfLocation(RestitutionState restitutionState) throws RemoteException{
-        var headQueue = queue.poll();
+        PersonUGE headQueue = queue.poll();
         restitutionStateByPerson.get(tenant).add(restitutionState);
         if(headQueue != null){
             setTenant(headQueue);

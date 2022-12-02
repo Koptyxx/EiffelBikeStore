@@ -25,9 +25,14 @@ public class Store extends UnicastRemoteObject implements IStore {
     }
 
     @Override
-    public void addBike(long id, PersonUGE personUGE) throws RemoteException {
+    public IBike getBike(long id) throws RemoteException {
+        return  bikes.get(id);
+    }
+
+    @Override
+    public void addBike(long id, PersonUGE personUGE, int price) throws RemoteException {
         Objects.requireNonNull(personUGE);
-        bikes.put(id, new Bike(id, personUGE));
+        bikes.put(id, new Bike(id, personUGE, price));
     }
 
     @Override
@@ -58,14 +63,14 @@ public class Store extends UnicastRemoteObject implements IStore {
 
     @Override
     public Bike searchBike(long id) throws RemoteException {
-        var bike = bikes.get(id);
+        Bike bike = bikes.get(id);
         if(bike == null)
             throw new IllegalStateException();
         return bike;
     }
     @Override
     public boolean rentRequest(PersonUGE personUGE, long id) throws RemoteException {
-        var bike = bikes.get(id);
+        Bike bike = bikes.get(id);
         if(bike == null){
             throw new IllegalStateException();
         }
@@ -81,7 +86,7 @@ public class Store extends UnicastRemoteObject implements IStore {
 
     @Override
     public void stopActualLocation(long id, RestitutionState restitutionState) throws RemoteException {
-        var bike = bikes.get(id);
+        Bike bike = bikes.get(id);
         if(bike == null){
             throw new IllegalStateException();
         }
@@ -94,12 +99,40 @@ public class Store extends UnicastRemoteObject implements IStore {
             transactionsHistory.add(new Transaction(bike.getTenant(), bike));
         }
     }
+
+    @Override
     public List<Transaction> getTransactionsHistory() throws RemoteException {
-        return List.copyOf(transactionsHistory);
+        return (transactionsHistory);
+
     }
 
-    public Set<IBike> getCanBeBuy() throws RemoteException{
-        return Set.copyOf(canBeBuy);
+
+    @Override
+    public Set<IBike> getCanBeBuy() throws RemoteException {
+            return canBeBuy;
+
+    }
+
+    @Override
+    public long[] getCanBeBuyId() throws RemoteException{
+        long[] lstId = new long[canBeBuy.size()];
+        int i = 0;
+        for(IBike elem : canBeBuy){
+            lstId[i] = elem.getId();
+            i++;
+        }
+        return lstId;
+    }
+
+    @Override
+    public long[] getCanBeBuyPrice() throws RemoteException {
+        long[] lstId = new long[canBeBuy.size()];
+        int i = 0;
+        for(IBike elem : canBeBuy){
+            lstId[i] = elem.getPrice();
+            i++;
+        }
+        return lstId;
     }
 
 }
