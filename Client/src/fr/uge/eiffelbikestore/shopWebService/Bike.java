@@ -5,7 +5,7 @@
  * by the Apache Axis 1.4 Apr 22, 2006 (06:55:48 PDT) WSDL2Java emitter.
  */
 
-package fr.uge.eiffelbikestore.shop;
+package fr.uge.eiffelbikestore.shopWebService;
 
 public class Bike  implements java.io.Serializable {
     private long id;
@@ -98,16 +98,16 @@ public class Bike  implements java.io.Serializable {
         new org.apache.axis.description.TypeDesc(Bike.class, true);
 
     static {
-        typeDesc.setXmlType(new javax.xml.namespace.QName("http://shop.eiffelbikestore.uge.fr", "Bike"));
+        typeDesc.setXmlType(new javax.xml.namespace.QName("http://shopWebService.eiffelbikestore.uge.fr", "Bike"));
         org.apache.axis.description.ElementDesc elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("id");
-        elemField.setXmlName(new javax.xml.namespace.QName("http://shop.eiffelbikestore.uge.fr", "id"));
+        elemField.setXmlName(new javax.xml.namespace.QName("http://shopWebService.eiffelbikestore.uge.fr", "id"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("price");
-        elemField.setXmlName(new javax.xml.namespace.QName("http://shop.eiffelbikestore.uge.fr", "price"));
+        elemField.setXmlName(new javax.xml.namespace.QName("http://shopWebService.eiffelbikestore.uge.fr", "price"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "long"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);

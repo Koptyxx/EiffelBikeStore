@@ -1,14 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<wsdl:definitions targetNamespace="http://shop.eiffelbikestore.uge.fr" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://shop.eiffelbikestore.uge.fr" xmlns:intf="http://shop.eiffelbikestore.uge.fr" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<wsdl:definitions targetNamespace="http://shopWebService.eiffelbikestore.uge.fr" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://shopWebService.eiffelbikestore.uge.fr" xmlns:intf="http://shopWebService.eiffelbikestore.uge.fr" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 <!--WSDL created by Apache Axis version: 1.4
 Built on Apr 22, 2006 (06:55:48 PDT)-->
  <wsdl:types>
-  <schema elementFormDefault="qualified" targetNamespace="http://shop.eiffelbikestore.uge.fr" xmlns="http://www.w3.org/2001/XMLSchema">
-   <element name="loadBike">
-    <complexType/>
+  <schema elementFormDefault="qualified" targetNamespace="http://shopWebService.eiffelbikestore.uge.fr" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="getClient">
+    <complexType>
+     <sequence>
+      <element name="id" type="xsd:long"/>
+     </sequence>
+    </complexType>
    </element>
-   <element name="loadBikeResponse">
-    <complexType/>
+   <element name="getClientResponse">
+    <complexType>
+     <sequence>
+      <element name="getClientReturn" type="impl:Client"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="Client">
+    <sequence>
+     <element name="id" type="xsd:long"/>
+    </sequence>
+   </complexType>
+   <element name="getDispo">
+    <complexType>
+     <sequence>
+      <element name="id" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getDispoResponse">
+    <complexType>
+     <sequence>
+      <element name="getDispoReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
    </element>
    <element name="getBike">
     <complexType>
@@ -30,25 +57,21 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      <element name="price" type="xsd:long"/>
     </sequence>
    </complexType>
-   <element name="showCart">
+   <element name="loadBike">
     <complexType/>
    </element>
-   <element name="showCartResponse">
+   <element name="loadBikeResponse">
+    <complexType/>
+   </element>
+   <element name="registryClients">
     <complexType>
      <sequence>
-      <element maxOccurs="unbounded" name="showCartReturn" type="impl:Bike"/>
+      <element name="id" type="xsd:long"/>
      </sequence>
     </complexType>
    </element>
-   <element name="allBike">
+   <element name="registryClientsResponse">
     <complexType/>
-   </element>
-   <element name="allBikeResponse">
-    <complexType>
-     <sequence>
-      <element maxOccurs="unbounded" name="allBikeReturn" type="impl:Bike"/>
-     </sequence>
-    </complexType>
    </element>
    <element name="getBikePrice">
     <complexType>
@@ -64,24 +87,11 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
-   <element name="getDispo">
-    <complexType>
-     <sequence>
-      <element name="id" type="xsd:long"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="getDispoResponse">
-    <complexType>
-     <sequence>
-      <element name="getDispoReturn" type="xsd:boolean"/>
-     </sequence>
-    </complexType>
-   </element>
    <element name="addToCart">
     <complexType>
      <sequence>
-      <element name="id" type="xsd:long"/>
+      <element name="idClient" type="xsd:long"/>
+      <element name="idBike" type="xsd:long"/>
      </sequence>
     </complexType>
    </element>
@@ -92,88 +102,58 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
-   <element name="validBuy">
+   <element name="allBike">
     <complexType/>
    </element>
-   <element name="validBuyResponse">
+   <element name="allBikeResponse">
     <complexType>
      <sequence>
-      <element name="validBuyReturn" type="xsd:int"/>
+      <element maxOccurs="unbounded" name="allBikeReturn" type="impl:Bike"/>
      </sequence>
     </complexType>
    </element>
-   <element name="cartNbElem">
-    <complexType/>
-   </element>
-   <element name="cartNbElemResponse">
+   <element name="validBuy">
     <complexType>
      <sequence>
-      <element name="cartNbElemReturn" type="xsd:int"/>
+      <element name="idClient" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="validBuyResponse">
+    <complexType/>
+   </element>
+   <element name="allClients">
+    <complexType/>
+   </element>
+   <element name="allClientsResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="allClientsReturn" type="impl:Client"/>
      </sequence>
     </complexType>
    </element>
   </schema>
  </wsdl:types>
 
-   <wsdl:message name="addToCartResponse">
+   <wsdl:message name="loadBikeRequest">
 
-      <wsdl:part element="impl:addToCartResponse" name="parameters">
-
-      </wsdl:part>
-
-   </wsdl:message>
-
-   <wsdl:message name="addToCartRequest">
-
-      <wsdl:part element="impl:addToCart" name="parameters">
+      <wsdl:part element="impl:loadBike" name="parameters">
 
       </wsdl:part>
 
    </wsdl:message>
 
-   <wsdl:message name="validBuyResponse">
+   <wsdl:message name="allBikeResponse">
 
-      <wsdl:part element="impl:validBuyResponse" name="parameters">
-
-      </wsdl:part>
-
-   </wsdl:message>
-
-   <wsdl:message name="getBikePriceResponse">
-
-      <wsdl:part element="impl:getBikePriceResponse" name="parameters">
+      <wsdl:part element="impl:allBikeResponse" name="parameters">
 
       </wsdl:part>
 
    </wsdl:message>
 
-   <wsdl:message name="cartNbElemResponse">
+   <wsdl:message name="registryClientsRequest">
 
-      <wsdl:part element="impl:cartNbElemResponse" name="parameters">
-
-      </wsdl:part>
-
-   </wsdl:message>
-
-   <wsdl:message name="loadBikeResponse">
-
-      <wsdl:part element="impl:loadBikeResponse" name="parameters">
-
-      </wsdl:part>
-
-   </wsdl:message>
-
-   <wsdl:message name="getDispoRequest">
-
-      <wsdl:part element="impl:getDispo" name="parameters">
-
-      </wsdl:part>
-
-   </wsdl:message>
-
-   <wsdl:message name="getBikeRequest">
-
-      <wsdl:part element="impl:getBike" name="parameters">
+      <wsdl:part element="impl:registryClients" name="parameters">
 
       </wsdl:part>
 
@@ -195,6 +175,14 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
+   <wsdl:message name="getClientResponse">
+
+      <wsdl:part element="impl:getClientResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
    <wsdl:message name="getBikePriceRequest">
 
       <wsdl:part element="impl:getBikePrice" name="parameters">
@@ -211,33 +199,9 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="loadBikeRequest">
+   <wsdl:message name="getClientRequest">
 
-      <wsdl:part element="impl:loadBike" name="parameters">
-
-      </wsdl:part>
-
-   </wsdl:message>
-
-   <wsdl:message name="allBikeResponse">
-
-      <wsdl:part element="impl:allBikeResponse" name="parameters">
-
-      </wsdl:part>
-
-   </wsdl:message>
-
-   <wsdl:message name="showCartRequest">
-
-      <wsdl:part element="impl:showCart" name="parameters">
-
-      </wsdl:part>
-
-   </wsdl:message>
-
-   <wsdl:message name="showCartResponse">
-
-      <wsdl:part element="impl:showCartResponse" name="parameters">
+      <wsdl:part element="impl:getClient" name="parameters">
 
       </wsdl:part>
 
@@ -251,9 +215,81 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="cartNbElemRequest">
+   <wsdl:message name="addToCartRequest">
 
-      <wsdl:part element="impl:cartNbElem" name="parameters">
+      <wsdl:part element="impl:addToCart" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="allClientsRequest">
+
+      <wsdl:part element="impl:allClients" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="validBuyResponse">
+
+      <wsdl:part element="impl:validBuyResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getBikePriceResponse">
+
+      <wsdl:part element="impl:getBikePriceResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="loadBikeResponse">
+
+      <wsdl:part element="impl:loadBikeResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="addToCartResponse">
+
+      <wsdl:part element="impl:addToCartResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="allClientsResponse">
+
+      <wsdl:part element="impl:allClientsResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="registryClientsResponse">
+
+      <wsdl:part element="impl:registryClientsResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getBikeRequest">
+
+      <wsdl:part element="impl:getBike" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDispoRequest">
+
+      <wsdl:part element="impl:getDispo" name="parameters">
 
       </wsdl:part>
 
@@ -261,61 +297,13 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    <wsdl:portType name="Shop">
 
-      <wsdl:operation name="loadBike">
+      <wsdl:operation name="getClient">
 
-         <wsdl:input message="impl:loadBikeRequest" name="loadBikeRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:loadBikeResponse" name="loadBikeResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="getBike">
-
-         <wsdl:input message="impl:getBikeRequest" name="getBikeRequest">
+         <wsdl:input message="impl:getClientRequest" name="getClientRequest">
 
        </wsdl:input>
 
-         <wsdl:output message="impl:getBikeResponse" name="getBikeResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="showCart">
-
-         <wsdl:input message="impl:showCartRequest" name="showCartRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:showCartResponse" name="showCartResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="allBike">
-
-         <wsdl:input message="impl:allBikeRequest" name="allBikeRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:allBikeResponse" name="allBikeResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="getBikePrice">
-
-         <wsdl:input message="impl:getBikePriceRequest" name="getBikePriceRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:getBikePriceResponse" name="getBikePriceResponse">
+         <wsdl:output message="impl:getClientResponse" name="getClientResponse">
 
        </wsdl:output>
 
@@ -333,6 +321,54 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
+      <wsdl:operation name="getBike">
+
+         <wsdl:input message="impl:getBikeRequest" name="getBikeRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getBikeResponse" name="getBikeResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="loadBike">
+
+         <wsdl:input message="impl:loadBikeRequest" name="loadBikeRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:loadBikeResponse" name="loadBikeResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="registryClients">
+
+         <wsdl:input message="impl:registryClientsRequest" name="registryClientsRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:registryClientsResponse" name="registryClientsResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getBikePrice">
+
+         <wsdl:input message="impl:getBikePriceRequest" name="getBikePriceRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getBikePriceResponse" name="getBikePriceResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
       <wsdl:operation name="addToCart">
 
          <wsdl:input message="impl:addToCartRequest" name="addToCartRequest">
@@ -340,6 +376,18 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
        </wsdl:input>
 
          <wsdl:output message="impl:addToCartResponse" name="addToCartResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="allBike">
+
+         <wsdl:input message="impl:allBikeRequest" name="allBikeRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:allBikeResponse" name="allBikeResponse">
 
        </wsdl:output>
 
@@ -357,13 +405,13 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="cartNbElem">
+      <wsdl:operation name="allClients">
 
-         <wsdl:input message="impl:cartNbElemRequest" name="cartNbElemRequest">
+         <wsdl:input message="impl:allClientsRequest" name="allClientsRequest">
 
        </wsdl:input>
 
-         <wsdl:output message="impl:cartNbElemResponse" name="cartNbElemResponse">
+         <wsdl:output message="impl:allClientsResponse" name="allClientsResponse">
 
        </wsdl:output>
 
@@ -375,89 +423,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
 
-      <wsdl:operation name="loadBike">
+      <wsdl:operation name="getClient">
 
          <wsdlsoap:operation soapAction=""/>
 
-         <wsdl:input name="loadBikeRequest">
+         <wsdl:input name="getClientRequest">
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-         <wsdl:output name="loadBikeResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="getBike">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="getBikeRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="getBikeResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="showCart">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="showCartRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="showCartResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="allBike">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="allBikeRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="allBikeResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="getBikePrice">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="getBikePriceRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="getBikePriceResponse">
+         <wsdl:output name="getClientResponse">
 
             <wsdlsoap:body use="literal"/>
 
@@ -483,6 +459,78 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
+      <wsdl:operation name="getBike">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getBikeRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getBikeResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="loadBike">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="loadBikeRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="loadBikeResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="registryClients">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="registryClientsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="registryClientsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getBikePrice">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getBikePriceRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getBikePriceResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
       <wsdl:operation name="addToCart">
 
          <wsdlsoap:operation soapAction=""/>
@@ -494,6 +542,24 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
          </wsdl:input>
 
          <wsdl:output name="addToCartResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="allBike">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="allBikeRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="allBikeResponse">
 
             <wsdlsoap:body use="literal"/>
 
@@ -519,17 +585,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="cartNbElem">
+      <wsdl:operation name="allClients">
 
          <wsdlsoap:operation soapAction=""/>
 
-         <wsdl:input name="cartNbElemRequest">
+         <wsdl:input name="allClientsRequest">
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-         <wsdl:output name="cartNbElemResponse">
+         <wsdl:output name="allClientsResponse">
 
             <wsdlsoap:body use="literal"/>
 
