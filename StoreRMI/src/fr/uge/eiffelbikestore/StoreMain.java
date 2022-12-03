@@ -12,7 +12,7 @@ import java.rmi.Naming;
 import java.rmi.registry.LocateRegistry;
 import java.util.Arrays;
 import java.util.Set;
-
+public class StoreMain {
     private RestitutionState parseRestitutionState(Integer value) {
         switch(value) {
             case 1: return RestitutionState.MISERABLE; break;
@@ -23,12 +23,13 @@ import java.util.Set;
             default: return null; break;
         }
     }
-
-    public static void main(String[] args) {
-
-
-
-public class StoreMain {
+    private static void help() {
+        System.out.println("Welcome to our application !\n" +
+                "Here are the commands that are available :\n" +
+                "[add id idProprio price] in order to add a bike to the store\n" +
+                "[rent idPerson idBike] in order to make a person renting a bike\n" +
+                "[stop idPerson restitutionState] in order to make a person stop renting a bike");
+    }
     public static void main(String[] args) {
         try {
             IStore store = new Store();
