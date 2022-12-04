@@ -6,12 +6,12 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Objects;
 
-public class Person extends UnicastRemoteObject implements PersonUGE{
+public class Person extends UnicastRemoteObject implements PersonUGE {
     private long id;
     private String firstName;
     private String lastName;
-
     private Status status;
+    private final Object lock = new Object();
 
     public Person() throws RemoteException {}
 
@@ -25,45 +25,61 @@ public class Person extends UnicastRemoteObject implements PersonUGE{
 
     @Override
     public long getId() throws RemoteException {
-        return id;
+        synchronized (lock) {
+            return id;
+        }
     }
 
     @Override
     public void setId(long id) throws RemoteException {
-        this.id = id;
+        synchronized (lock) {
+            this.id = id;
+        }
     }
 
     @Override
     public String getFirstName() throws RemoteException {
-        return firstName;
+        synchronized (lock) {
+            return firstName;
+        }
     }
 
     @Override
     public void setFirstName(String firstName) throws RemoteException {
-        Objects.requireNonNull(firstName);
-        this.firstName = firstName;
+        synchronized (lock) {
+            Objects.requireNonNull(firstName);
+            this.firstName = firstName;
+        }
     }
 
     @Override
     public String getLastName() throws RemoteException {
-        return lastName;
+        synchronized (lock) {
+            return lastName;
+        }
     }
 
     @Override
     public void setLastName(String lastName) throws RemoteException {
-        Objects.requireNonNull(lastName);
-        this.lastName = lastName;
+        synchronized (lock) {
+            Objects.requireNonNull(lastName);
+            this.lastName = lastName;
+        }
     }
 
     @Override
     public Status getStatus() throws RemoteException {
-        return this.status;
+        synchronized (lock) {
+            return this.status;
+        }
     }
 
     @Override
     public void setStatus(Status status) throws RemoteException {
-        Objects.requireNonNull(status);
-        this.status = status;
+        synchronized (lock) {
+            Objects.requireNonNull(status);
+            this.status = status;
+        }
     }
 
     @Override

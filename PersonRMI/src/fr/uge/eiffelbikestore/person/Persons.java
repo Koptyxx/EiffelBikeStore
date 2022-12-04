@@ -17,25 +17,33 @@ public class Persons extends UnicastRemoteObject implements IPersons{
 
     @Override
     public Map<Long, PersonUGE> getPersons() throws RemoteException {
-        return persons;
+        synchronized (persons) {
+            return persons;
+        }
     }
 
     @Override
     public void setPersons(Map<Long, PersonUGE> persons) throws RemoteException {
-        this.persons = persons;
+        synchronized (persons) {
+            this.persons = persons;
+        }
     }
 
     @Override
     public long createPerson(long id, String firstName, String lastName, Status status) throws RemoteException {
-        Objects.requireNonNull(firstName);
-        Objects.requireNonNull(lastName);
-        PersonUGE person = new Person(id, firstName, lastName, status);
-        persons.put(person.getId(), person);
-        return person.getId();
+        synchronized (persons) {
+            Objects.requireNonNull(firstName);
+            Objects.requireNonNull(lastName);
+            PersonUGE person = new Person(id, firstName, lastName, status);
+            persons.put(person.getId(), person);
+            return person.getId();
+        }
     }
 
     @Override
     public PersonUGE getPersonById(long id) throws RemoteException {
-        return persons.get(id);
+        synchronized (persons) {
+            return persons.get(id);
+        }
     }
 }
