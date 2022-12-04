@@ -1,0 +1,97 @@
+<ns1:deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java" xmlns:ns1="http://xml.apache.org/axis/wsdd/">
+ <ns1:globalConfiguration>
+  <ns1:parameter name="sendMultiRefs" value="true"/>
+  <ns1:parameter name="disablePrettyXML" value="true"/>
+  <ns1:parameter name="adminPassword" value="admin"/>
+  <ns1:parameter name="attachments.Directory" value="C:\Users\Brayan\eclipse-workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Shop\WEB-INF\attachments"/>
+  <ns1:parameter name="dotNetSoapEncFix" value="true"/>
+  <ns1:parameter name="enableNamespacePrefixOptimization" value="false"/>
+  <ns1:parameter name="sendXMLDeclaration" value="true"/>
+  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
+  <ns1:parameter name="sendXsiTypes" value="true"/>
+  <ns1:requestFlow>
+   <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
+    <ns1:parameter name="scope" value="session"/>
+   </ns1:handler>
+   <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
+    <ns1:parameter name="scope" value="request"/>
+    <ns1:parameter name="extension" value=".jwr"/>
+   </ns1:handler>
+  </ns1:requestFlow>
+ </ns1:globalConfiguration>
+ <ns1:handler name="URLMapper" type="java:org.apache.axis.handlers.http.URLMapper"/>
+ <ns1:handler name="Authenticate" type="java:org.apache.axis.handlers.SimpleAuthenticationHandler"/>
+ <ns1:handler name="LocalResponder" type="java:org.apache.axis.transport.local.LocalResponder"/>
+ <ns1:service name="Shop" provider="java:RPC" style="wrapped" use="literal">
+ <parameter name="scope" value="application"/>
+  <ns2:operation name="getClient" qname="ns1:getClient" returnQName="ns1:getClientReturn" returnType="ns1:Client" soapAction="" xmlns:ns1="http://shop.eiffelbikestore.uge.fr" xmlns:ns2="http://xml.apache.org/axis/wsdd/">
+   <ns2:parameter qname="ns1:id" type="xsd:long" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns2:operation>
+  <ns1:operation name="cartValueConverted" qname="ns2:cartValueConverted" returnQName="ns2:cartValueConvertedReturn" returnType="xsd:double" soapAction="" xmlns:ns2="http://shop.eiffelbikestore.uge.fr" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns2:idClient" type="xsd:long"/>
+  </ns1:operation>
+  <ns1:operation name="loadBike" qname="ns3:loadBike" soapAction="" xmlns:ns3="http://shop.eiffelbikestore.uge.fr"/>
+  <ns1:operation name="allClients" qname="ns4:allClients" returnQName="ns4:allClientsReturn" returnType="ns4:Client" soapAction="" xmlns:ns4="http://shop.eiffelbikestore.uge.fr"/>
+  <ns1:operation name="getDispo" qname="ns5:getDispo" returnQName="ns5:getDispoReturn" returnType="xsd:boolean" soapAction="" xmlns:ns5="http://shop.eiffelbikestore.uge.fr" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns5:id" type="xsd:long"/>
+  </ns1:operation>
+  <ns1:operation name="addToCart" qname="ns6:addToCart" returnQName="ns6:addToCartReturn" returnType="xsd:boolean" soapAction="" xmlns:ns6="http://shop.eiffelbikestore.uge.fr" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns6:idClient" type="xsd:long"/>
+   <ns1:parameter qname="ns6:idBike" type="xsd:long"/>
+  </ns1:operation>
+  <ns1:operation name="validBuy" qname="ns7:validBuy" soapAction="" xmlns:ns7="http://shop.eiffelbikestore.uge.fr">
+   <ns1:parameter qname="ns7:idClient" type="xsd:long" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="getBike" qname="ns8:getBike" returnQName="ns8:getBikeReturn" returnType="ns8:Bike" soapAction="" xmlns:ns8="http://shop.eiffelbikestore.uge.fr">
+   <ns1:parameter qname="ns8:id" type="xsd:long" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="allBike" qname="ns9:allBike" returnQName="ns9:allBikeReturn" returnType="ns9:Bike" soapAction="" xmlns:ns9="http://shop.eiffelbikestore.uge.fr"/>
+  <ns1:operation name="registryClients" qname="ns10:registryClients" soapAction="" xmlns:ns10="http://shop.eiffelbikestore.uge.fr">
+   <ns1:parameter qname="ns10:id" type="xsd:long" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns10:devise" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="getBikePrice" qname="ns11:getBikePrice" returnQName="ns11:getBikePriceReturn" returnType="xsd:long" soapAction="" xmlns:ns11="http://shop.eiffelbikestore.uge.fr" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns11:id" type="xsd:long"/>
+  </ns1:operation>
+  <ns1:operation name="getClientDevise" qname="ns12:getClientDevise" returnQName="ns12:getClientDeviseReturn" returnType="xsd:string" soapAction="" xmlns:ns12="http://shop.eiffelbikestore.uge.fr" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns12:idClient" type="xsd:long"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="allClients validBuy registryClients getClientDevise getDispo addToCart getBike getClient cartValueConverted allBike loadBike getBikePrice"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="wsdlPortType" value="Shop"/>
+  <ns1:parameter name="className" value="fr.uge.eiffelbikestore.shop.Shop"/>
+  <ns1:parameter name="wsdlServicePort" value="Shop"/>
+  <ns1:parameter name="schemaQualified" value="http://shop.eiffelbikestore.uge.fr"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://shop.eiffelbikestore.uge.fr"/>
+  <ns1:parameter name="wsdlServiceElement" value="ShopService"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns13:Client" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:fr.uge.eiffelbikestore.shop.Client" xmlns:ns13="http://shop.eiffelbikestore.uge.fr"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns14:Bike" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:fr.uge.eiffelbikestore.shop.Bike" xmlns:ns14="http://shop.eiffelbikestore.uge.fr"/>
+ </ns1:service>
+ <ns1:service name="AdminService" provider="java:MSG">
+  <ns1:parameter name="allowedMethods" value="AdminService"/>
+  <ns1:parameter name="enableRemoteAdmin" value="false"/>
+  <ns1:parameter name="className" value="org.apache.axis.utils.Admin"/>
+  <ns1:namespace>http://xml.apache.org/axis/wsdd/</ns1:namespace>
+ </ns1:service>
+ <ns1:service name="Version" provider="java:RPC">
+  <ns1:parameter name="allowedMethods" value="getVersion"/>
+  <ns1:parameter name="className" value="org.apache.axis.Version"/>
+ </ns1:service>
+ <ns1:transport name="http">
+  <ns1:requestFlow>
+   <ns1:handler type="URLMapper"/>
+   <ns1:handler type="java:org.apache.axis.handlers.http.HTTPAuthHandler"/>
+  </ns1:requestFlow>
+  <ns1:parameter name="qs:list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <ns1:parameter name="qs:wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+  <ns1:parameter name="qs.list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <ns1:parameter name="qs.method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <ns1:parameter name="qs:method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <ns1:parameter name="qs.wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+ </ns1:transport>
+ <ns1:transport name="local">
+  <ns1:responseFlow>
+   <ns1:handler type="LocalResponder"/>
+  </ns1:responseFlow>
+ </ns1:transport>
+</ns1:deployment>

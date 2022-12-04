@@ -15,15 +15,7 @@ out/
 ##############################
 ## Eclipse
 ##############################
-.settings/
-bin/
-tmp/
-.metadata
-.classpath
-.project
-build/
-*.bak
-*.wsdd
+
 
 ##############################
 ## OS X
