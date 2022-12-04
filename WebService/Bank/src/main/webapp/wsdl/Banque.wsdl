@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://banque.eiffelbikestore.uge.fr" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://banque.eiffelbikestore.uge.fr" xmlns:intf="http://banque.eiffelbikestore.uge.fr" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://banque.eiffelbikestore.uge.fr" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="getClientId">
+    <complexType/>
+   </element>
+   <element name="getClientIdResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getClientIdReturn" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="nbCLient">
+    <complexType/>
+   </element>
+   <element name="nbCLientResponse">
+    <complexType>
+     <sequence>
+      <element name="nbCLientReturn" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="addClient">
+    <complexType>
+     <sequence>
+      <element name="idClient" type="xsd:long"/>
+      <element name="montant" type="xsd:double"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="addClientResponse">
+    <complexType/>
+   </element>
+   <element name="getArgentClient">
+    <complexType>
+     <sequence>
+      <element name="idClient" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getArgentClientResponse">
+    <complexType>
+     <sequence>
+      <element name="getArgentClientReturn" type="xsd:double"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="deleteClient">
+    <complexType>
+     <sequence>
+      <element name="client" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="deleteClientResponse">
+    <complexType/>
+   </element>
+   <element name="addMontant">
+    <complexType>
+     <sequence>
+      <element name="idClient" type="xsd:long"/>
+      <element name="montant" type="xsd:double"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="addMontantResponse">
+    <complexType/>
+   </element>
+   <element name="isPossible">
+    <complexType>
+     <sequence>
+      <element name="idClient" type="xsd:long"/>
+      <element name="montant" type="xsd:double"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="isPossibleResponse">
+    <complexType>
+     <sequence>
+      <element name="isPossibleReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="subMontant">
+    <complexType>
+     <sequence>
+      <element name="idClient" type="xsd:long"/>
+      <element name="montant" type="xsd:double"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="subMontantResponse">
+    <complexType/>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="getClientIdResponse">
+
+      <wsdl:part element="impl:getClientIdResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="nbCLientResponse">
+
+      <wsdl:part element="impl:nbCLientResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="addClientResponse">
+
+      <wsdl:part element="impl:addClientResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="addClientRequest">
+
+      <wsdl:part element="impl:addClient" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getClientIdRequest">
+
+      <wsdl:part element="impl:getClientId" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteClientResponse">
+
+      <wsdl:part element="impl:deleteClientResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteClientRequest">
+
+      <wsdl:part element="impl:deleteClient" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="subMontantResponse">
+
+      <wsdl:part element="impl:subMontantResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="addMontantResponse">
+
+      <wsdl:part element="impl:addMontantResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="nbCLientRequest">
+
+      <wsdl:part element="impl:nbCLient" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getArgentClientRequest">
+
+      <wsdl:part element="impl:getArgentClient" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="addMontantRequest">
+
+      <wsdl:part element="impl:addMontant" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="isPossibleRequest">
+
+      <wsdl:part element="impl:isPossible" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getArgentClientResponse">
+
+      <wsdl:part element="impl:getArgentClientResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="subMontantRequest">
+
+      <wsdl:part element="impl:subMontant" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="isPossibleResponse">
+
+      <wsdl:part element="impl:isPossibleResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="Banque">
+
+      <wsdl:operation name="getClientId">
+
+         <wsdl:input message="impl:getClientIdRequest" name="getClientIdRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getClientIdResponse" name="getClientIdResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="nbCLient">
+
+         <wsdl:input message="impl:nbCLientRequest" name="nbCLientRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:nbCLientResponse" name="nbCLientResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="addClient">
+
+         <wsdl:input message="impl:addClientRequest" name="addClientRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:addClientResponse" name="addClientResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getArgentClient">
+
+         <wsdl:input message="impl:getArgentClientRequest" name="getArgentClientRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getArgentClientResponse" name="getArgentClientResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteClient">
+
+         <wsdl:input message="impl:deleteClientRequest" name="deleteClientRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:deleteClientResponse" name="deleteClientResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="addMontant">
+
+         <wsdl:input message="impl:addMontantRequest" name="addMontantRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:addMontantResponse" name="addMontantResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="isPossible">
+
+         <wsdl:input message="impl:isPossibleRequest" name="isPossibleRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:isPossibleResponse" name="isPossibleResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="subMontant">
+
+         <wsdl:input message="impl:subMontantRequest" name="subMontantRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:subMontantResponse" name="subMontantResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="BanqueSoapBinding" type="impl:Banque">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="getClientId">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getClientIdRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getClientIdResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="nbCLient">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="nbCLientRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="nbCLientResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="addClient">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="addClientRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="addClientResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getArgentClient">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getArgentClientRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getArgentClientResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteClient">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="deleteClientRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="deleteClientResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="addMontant">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="addMontantRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="addMontantResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="isPossible">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="isPossibleRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="isPossibleResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="subMontant">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="subMontantRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="subMontantResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="BanqueService">
+
+      <wsdl:port binding="impl:BanqueSoapBinding" name="Banque">
+
+         <wsdlsoap:address location="http://localhost:8080/Bank/services/Banque"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>
