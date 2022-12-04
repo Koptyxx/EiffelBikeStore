@@ -41,7 +41,8 @@ public class Client {
                 "[addBike id idProprio price] in order to add a bike to the store\n" +
                 "[rent idPerson idBike] in order to make a person renting a bike\n" +
                 "[stop idPerson restitutionState] in order to make a person stop renting a bike\n" +
-                "[addUser id firstName lastName status] in order to add a new person to the ");
+                "[addUser id firstName lastName status] in order to add a new person to the\n" +
+                "[quit] exit client");
     }
 
     public static void main(String[] args) throws MalformedURLException, NotBoundException, RemoteException {
@@ -118,6 +119,9 @@ public class Client {
                 }
                 if(Objects.equals(line[0], "help")) {
                     help();
+                }
+                if(Objects.equals(line[0], "quit")){
+                    System.exit(1);
                 }
             }
             catch (NumberFormatException numberFormatException) {
